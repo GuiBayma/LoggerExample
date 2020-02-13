@@ -11,17 +11,20 @@ final class Logger {
         return sharedInstance
     }
 
-    static func setup(queue: DispatchQueue = DispatchQueue.init(label: "logger")) {
+    static func setup(queue: DispatchQueue = DispatchQueue.init(label: "logger"),
+                      logLevel: LogLevel = .verbose) {
         if sharedInstance == nil {
-            sharedInstance = Logger(queue: queue)
+            sharedInstance = Logger(queue: queue, logLevel: logLevel)
         }
     }
 
-    private init(queue: DispatchQueue) {
+    private init(queue: DispatchQueue, logLevel: LogLevel) {
         self.queue = queue
+        self.logLevel = logLevel
     }
 
-    private var queue: DispatchQueue
+    private let queue: DispatchQueue
+    private let logLevel: LogLevel
 
     func log(_ logType: LogType,
              _ logMessage: String? = nil,
@@ -29,7 +32,7 @@ final class Logger {
              functionName: String = #function,
              lineNumber: Int = #line) {
 
-        guard Env.configuration == .debug else { return }
+        guard Env.configuration == .debug, shouldLog(type: logType) else { return }
 
         // Get only the file name without the full path
         var filename = (file as NSString).lastPathComponent
@@ -55,5 +58,12 @@ final class Logger {
         queue.async {
             print(message)
         }
+    }
+
+    private func shouldLog(type: LogType) -> Bool {
+        if case let LogLevel.filtered(logType) = logLevel, logType != type {
+            return false
+        }
+        return true
     }
 }
