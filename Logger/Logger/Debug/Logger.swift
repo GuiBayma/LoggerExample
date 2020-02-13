@@ -2,12 +2,32 @@ import Foundation
 
 final class Logger {
 
-    class func log(_ logType: LogType,
-                   _ logMessage: String? = nil,
-                   file: String = #file,
-                   functionName: String = #function,
-                   lineNumber: Int = #line,
-                   queue: DispatchQueue = DispatchQueue.init(label: "logger")) {
+    static private var sharedInstance: Logger?
+
+    static var shared: Logger {
+        guard let sharedInstance = sharedInstance else {
+            fatalError("Logger: call setup() first")
+        }
+        return sharedInstance
+    }
+
+    static func setup(queue: DispatchQueue = DispatchQueue.init(label: "logger")) {
+        if sharedInstance == nil {
+            sharedInstance = Logger(queue: queue)
+        }
+    }
+
+    private init(queue: DispatchQueue) {
+        self.queue = queue
+    }
+
+    private var queue: DispatchQueue
+
+    func log(_ logType: LogType,
+             _ logMessage: String? = nil,
+             file: String = #file,
+             functionName: String = #function,
+             lineNumber: Int = #line) {
 
         guard Env.configuration == .debug else { return }
 

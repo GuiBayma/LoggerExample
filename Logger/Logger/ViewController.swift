@@ -9,7 +9,7 @@ final class ViewController: UIViewController {
     init(customView: UIView = UIView()) {
         self.customView = customView
         super.init(nibName: nil, bundle: nil)
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     @available(*, unavailable)
@@ -22,59 +22,59 @@ final class ViewController: UIViewController {
     override func loadView() {
         customView.backgroundColor = .cyan
         view = customView
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     // MARK: - View-Related Events
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     // MARK: - Safe Area
 
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     // MARK: - View's Margins
 
     override func viewLayoutMarginsDidChange() {
         super.viewLayoutMarginsDidChange()
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     // MARK: - View’s Layout Behavior
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        Logger.log(.controller)
+        Logger.shared.log(.controller)
     }
 }
