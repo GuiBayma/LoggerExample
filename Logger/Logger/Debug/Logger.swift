@@ -26,7 +26,7 @@ final class Logger {
         """
 
         if let logMessage = logMessage {
-            message.append("\(logMessage)\n")
+            message.append(" \(logMessage)\n")
         }
 
         print(message)
