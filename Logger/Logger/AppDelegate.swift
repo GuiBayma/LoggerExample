@@ -12,6 +12,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = controller
         window?.makeKeyAndVisible()
 
+        Logger.log(.appDelegate, "launchOptions: \(String(describing: launchOptions))")
+
         return true
     }
 }
