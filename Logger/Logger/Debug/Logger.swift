@@ -6,7 +6,10 @@ final class Logger {
                    _ logMessage: String? = nil,
                    file: String = #file,
                    functionName: String = #function,
-                   lineNumber: Int = #line) {
+                   lineNumber: Int = #line,
+                   queue: DispatchQueue = DispatchQueue.init(label: "logger")) {
+
+        guard Env.configuration == .debug else { return }
 
         // Get only the file name without the full path
         var filename = (file as NSString).lastPathComponent
@@ -29,6 +32,8 @@ final class Logger {
             message.append(" \(logMessage)\n")
         }
 
-        print(message)
+        queue.async {
+            print(message)
+        }
     }
 }
