@@ -11,19 +11,26 @@ final class Logger {
         return sharedInstance
     }
 
-    static func setup(queue: DispatchQueue = DispatchQueue.init(label: "logger"),
+    static func setup(queue: DispatchQueue = DispatchQueue(label: "Logger"),
+                      writer: ConsoleWriterProtocol = ConsoleWriter(),
                       logLevel: LogLevel = .verbose) {
         if sharedInstance == nil {
-            sharedInstance = Logger(queue: queue, logLevel: logLevel)
+            sharedInstance = Logger(queue: queue, writer: writer, logLevel: logLevel)
         }
     }
 
-    private init(queue: DispatchQueue, logLevel: LogLevel) {
+    static func resetInstance() {
+        sharedInstance = nil
+    }
+
+    private init(queue: DispatchQueue, writer: ConsoleWriterProtocol, logLevel: LogLevel) {
         self.queue = queue
+        self.writer = writer
         self.logLevel = logLevel
     }
 
     private let queue: DispatchQueue
+    private let writer: ConsoleWriterProtocol
     private let logLevel: LogLevel
 
     func log(_ logType: LogType,
@@ -52,11 +59,11 @@ final class Logger {
         """
 
         if let logMessage = logMessage {
-            message.append(" \(logMessage)\n")
+            message.append(" \(logMessage)")
         }
 
         queue.async {
-            print(message)
+            self.writer.print(message, separator: " ", terminator: "\n\n")
         }
     }
 
@@ -65,5 +72,17 @@ final class Logger {
             return false
         }
         return true
+    }
+}
+
+protocol ConsoleWriterProtocol {
+    func print(_ items: Any..., separator: String, terminator: String)
+}
+
+final class ConsoleWriter: ConsoleWriterProtocol {
+
+    func print(_ items: Any..., separator: String, terminator: String) {
+        let output = items.map { "\($0)" }.joined(separator: separator)
+        Swift.print(output, terminator: terminator)
     }
 }
