@@ -13,12 +13,12 @@ class LoggerTests: XCTestCase {
 
     var sut: Logger!
     var testQueue: DispatchQueue!
-    var writerMock: ConsoleWriterMock!
+    var consoleWriterMock: ConsoleWriterMock!
 
     override func setUp() {
         super.setUp()
         testQueue = DispatchQueue(label: "TestQueue")
-        writerMock = ConsoleWriterMock()
+        consoleWriterMock = ConsoleWriterMock()
     }
 
     override func tearDown() {
@@ -27,82 +27,82 @@ class LoggerTests: XCTestCase {
     }
 
     func testAppDelegateVerbose() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.appDelegate)
         testQueue.sync {}
 
-        XCTAssertNotNil(writerMock.output)
+        XCTAssertNotNil(consoleWriterMock.output)
     }
 
     func testAppDelegateMessageVerbose() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.appDelegate, "Test Message")
         testQueue.sync {}
 
-        XCTAssertNotNil(writerMock.output)
+        XCTAssertNotNil(consoleWriterMock.output)
     }
 
     func testAppDelegateFileredAppDelegate() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .filtered(.appDelegate))
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.appDelegate))
         sut = Logger.shared
 
         sut.log(.appDelegate)
         testQueue.sync {}
 
-        XCTAssertNotNil(writerMock.output)
+        XCTAssertNotNil(consoleWriterMock.output)
     }
 
     func testAppDelegateFileredController() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .filtered(.controller))
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.controller))
         sut = Logger.shared
 
         sut.log(.appDelegate)
         testQueue.sync {}
 
-        XCTAssertNil(writerMock.output)
+        XCTAssertNil(consoleWriterMock.output)
     }
 
     func testControllerVerbose() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.controller)
         testQueue.sync {}
 
-        XCTAssertNotNil(writerMock.output)
+        XCTAssertNotNil(consoleWriterMock.output)
     }
 
     func testControllerMessageVerbose() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.controller, "Test Message")
         testQueue.sync {}
 
-        XCTAssertNotNil(writerMock.output)
+        XCTAssertNotNil(consoleWriterMock.output)
     }
 
     func testControllerFileredAppDelegate() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .filtered(.appDelegate))
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.appDelegate))
         sut = Logger.shared
 
         sut.log(.controller)
         testQueue.sync {}
 
-        XCTAssertNil(writerMock.output)
+        XCTAssertNil(consoleWriterMock.output)
     }
 
     func testControllerFileredAppController() {
-        Logger.setup(queue: testQueue, writer: writerMock, logLevel: .filtered(.controller))
+        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.controller))
         sut = Logger.shared
 
         sut.log(.controller)
         testQueue.sync {}
 
-        XCTAssertNotNil(writerMock.output)
+        XCTAssertNotNil(consoleWriterMock.output)
     }
 }

@@ -17,6 +17,7 @@
 		1799492623F4E6020003F784 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799492523F4E6020003F784 /* LogLevel.swift */; };
 		1799492E23F82B930003F784 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799492D23F82B930003F784 /* LoggerTests.swift */; };
 		1799493623F832660003F784 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493523F832660003F784 /* main.swift */; };
+		1799493923F843A40003F784 /* ConsoleWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493823F843A40003F784 /* ConsoleWriter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		1799492D23F82B930003F784 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		1799492F23F82B930003F784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1799493523F832660003F784 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		1799493823F843A40003F784 /* ConsoleWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleWriter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		1799491C23F4D0E50003F784 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				1799493723F843910003F784 /* Modules */,
 				1799491D23F4D1F20003F784 /* Logger.swift */,
 				1799491F23F4D27A0003F784 /* LogType.swift */,
 				1799492523F4E6020003F784 /* LogLevel.swift */,
@@ -114,6 +117,14 @@
 				1799492F23F82B930003F784 /* Info.plist */,
 			);
 			path = LoggerTests;
+			sourceTree = "<group>";
+		};
+		1799493723F843910003F784 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				1799493823F843A40003F784 /* ConsoleWriter.swift */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +233,7 @@
 				1799490D23F4D0160003F784 /* ViewController.swift in Sources */,
 				1799491E23F4D1F20003F784 /* Logger.swift in Sources */,
 				1799490923F4D0160003F784 /* AppDelegate.swift in Sources */,
+				1799493923F843A40003F784 /* ConsoleWriter.swift in Sources */,
 				1799492223F4DF3A0003F784 /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
