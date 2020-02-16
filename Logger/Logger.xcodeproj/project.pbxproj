@@ -15,9 +15,10 @@
 		1799492023F4D27A0003F784 /* LogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799491F23F4D27A0003F784 /* LogType.swift */; };
 		1799492223F4DF3A0003F784 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799492123F4DF3A0003F784 /* Environment.swift */; };
 		1799492623F4E6020003F784 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799492523F4E6020003F784 /* LogLevel.swift */; };
-		1799492E23F82B930003F784 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799492D23F82B930003F784 /* LoggerTests.swift */; };
+		1799492E23F82B930003F784 /* ConsoleWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799492D23F82B930003F784 /* ConsoleWriterTests.swift */; };
 		1799493623F832660003F784 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493523F832660003F784 /* main.swift */; };
 		1799493923F843A40003F784 /* ConsoleWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493823F843A40003F784 /* ConsoleWriter.swift */; };
+		1799493B23F98D2D0003F784 /* WriterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493A23F98D2D0003F784 /* WriterProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +43,11 @@
 		1799492123F4DF3A0003F784 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1799492523F4E6020003F784 /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
 		1799492B23F82B920003F784 /* LoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1799492D23F82B930003F784 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
+		1799492D23F82B930003F784 /* ConsoleWriterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleWriterTests.swift; sourceTree = "<group>"; };
 		1799492F23F82B930003F784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1799493523F832660003F784 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1799493823F843A40003F784 /* ConsoleWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleWriter.swift; sourceTree = "<group>"; };
+		1799493A23F98D2D0003F784 /* WriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +115,7 @@
 		1799492C23F82B930003F784 /* LoggerTests */ = {
 			isa = PBXGroup;
 			children = (
-				1799492D23F82B930003F784 /* LoggerTests.swift */,
+				1799492D23F82B930003F784 /* ConsoleWriterTests.swift */,
 				1799492F23F82B930003F784 /* Info.plist */,
 			);
 			path = LoggerTests;
@@ -122,6 +124,7 @@
 		1799493723F843910003F784 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1799493A23F98D2D0003F784 /* WriterProtocol.swift */,
 				1799493823F843A40003F784 /* ConsoleWriter.swift */,
 			);
 			path = Modules;
@@ -230,6 +233,7 @@
 				1799492023F4D27A0003F784 /* LogType.swift in Sources */,
 				1799493623F832660003F784 /* main.swift in Sources */,
 				1799492623F4E6020003F784 /* LogLevel.swift in Sources */,
+				1799493B23F98D2D0003F784 /* WriterProtocol.swift in Sources */,
 				1799490D23F4D0160003F784 /* ViewController.swift in Sources */,
 				1799491E23F4D1F20003F784 /* Logger.swift in Sources */,
 				1799490923F4D0160003F784 /* AppDelegate.swift in Sources */,
@@ -242,7 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1799492E23F82B930003F784 /* LoggerTests.swift in Sources */,
+				1799492E23F82B930003F784 /* ConsoleWriterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

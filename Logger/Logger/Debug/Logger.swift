@@ -4,6 +4,7 @@ final class Logger {
 
     static private var sharedInstance: Logger?
 
+    /// Logger shared instance.
     static var shared: Logger {
         guard let sharedInstance = sharedInstance else {
             fatalError("Logger: call setup() first")
@@ -11,28 +12,41 @@ final class Logger {
         return sharedInstance
     }
 
+    /// Setup method for Logger class. Should be called before trying to retrieve shared instance.
+    /// - Parameters:
+    ///   - queue: `DispatchQueue` - queue the logger will write on. Default value is `DispatchQueue(label: "Logger")`.
+    ///   - modules: `[WriterProtocol]` - array the logger will call `write` method. Default value is `[ConsoleWriter()]`.
+    ///   - logLevel: `LogLevel` - can be `verbose` or `filtered`. Default value is `.verbose`.
     static func setup(queue: DispatchQueue = DispatchQueue(label: "Logger"),
-                      consoleWriter: ConsoleWriterProtocol = ConsoleWriter(),
+                      modules: [WriterProtocol] = [ConsoleWriter()],
                       logLevel: LogLevel = .verbose) {
         if sharedInstance == nil {
-            sharedInstance = Logger(queue: queue, consoleWriter: consoleWriter, logLevel: logLevel)
+            sharedInstance = Logger(queue: queue, modules: modules, logLevel: logLevel)
         }
     }
 
+    /// Set the shared instance to `nil`. Used mainly for testing purposes.
     static func resetInstance() {
         sharedInstance = nil
     }
 
-    private init(queue: DispatchQueue, consoleWriter: ConsoleWriterProtocol, logLevel: LogLevel) {
+    private init(queue: DispatchQueue, modules: [WriterProtocol], logLevel: LogLevel) {
         self.queue = queue
-        self.consoleWriter = consoleWriter
+        self.modules = modules
         self.logLevel = logLevel
     }
 
     private let queue: DispatchQueue
-    private let consoleWriter: ConsoleWriterProtocol
+    private let modules: [WriterProtocol]
     private let logLevel: LogLevel
 
+    /// Called to write a log.
+    /// - Parameters:
+    ///   - logType: `LogType` - classification of the log message.
+    ///   - logMessage: `String?` - optional log message. Default value is `nil`.
+    ///   - file: `String` - name of the file the log was called. Default value is `#file`.
+    ///   - functionName: `String` - name of the function the log was called. Default value is `#function`.
+    ///   - lineNumber: `Int` - number of the line the log was called. Default value is `#line`.
     func log(_ logType: LogType,
              _ logMessage: String? = nil,
              file: String = #file,
@@ -40,6 +54,25 @@ final class Logger {
              lineNumber: Int = #line) {
 
         guard Env.configuration == .debug, shouldLog(type: logType) else { return }
+
+        let message = generateMessage(logType: logType,
+                                      logMessage: logMessage,
+                                      file: file,
+                                      functionName: functionName,
+                                      lineNumber: lineNumber)
+
+        queue.async { [weak self] in
+            self?.modules.forEach {
+                $0.write(message, separator: " ", terminator: "\n\n")
+            }
+        }
+    }
+
+    private func generateMessage(logType: LogType,
+                                 logMessage: String?,
+                                 file: String,
+                                 functionName: String,
+                                 lineNumber: Int) -> String {
 
         // Get only the file name without the full path
         var filename = (file as NSString).lastPathComponent
@@ -62,9 +95,7 @@ final class Logger {
             message.append(" \(logMessage)")
         }
 
-        queue.async { [weak self] in
-            self?.consoleWriter.print(message, separator: " ", terminator: "\n\n")
-        }
+        return message
     }
 
     private func shouldLog(type: LogType) -> Bool {

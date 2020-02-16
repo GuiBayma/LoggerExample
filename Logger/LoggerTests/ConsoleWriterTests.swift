@@ -1,15 +1,15 @@
 import XCTest
 @testable import Logger
 
-class ConsoleWriterMock: ConsoleWriterProtocol {
+class ConsoleWriterMock: WriterProtocol {
     var output: String?
 
-    func print(_ items: Any..., separator: String, terminator: String) {
+    func write(_ items: Any..., separator: String, terminator: String) {
         output = items.map { "\($0)" }.joined(separator: separator)
     }
 }
 
-class LoggerTests: XCTestCase {
+class ConsoleWriterTests: XCTestCase {
 
     var sut: Logger!
     var testQueue: DispatchQueue!
@@ -27,7 +27,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testAppDelegateVerbose() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.appDelegate)
@@ -37,7 +37,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testAppDelegateMessageVerbose() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.appDelegate, "Test Message")
@@ -47,7 +47,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testAppDelegateFileredAppDelegate() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.appDelegate))
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.appDelegate))
         sut = Logger.shared
 
         sut.log(.appDelegate)
@@ -57,7 +57,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testAppDelegateFileredController() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.controller))
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.controller))
         sut = Logger.shared
 
         sut.log(.appDelegate)
@@ -67,7 +67,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testControllerVerbose() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.controller)
@@ -77,7 +77,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testControllerMessageVerbose() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .verbose)
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
         sut.log(.controller, "Test Message")
@@ -87,7 +87,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testControllerFileredAppDelegate() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.appDelegate))
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.appDelegate))
         sut = Logger.shared
 
         sut.log(.controller)
@@ -97,7 +97,7 @@ class LoggerTests: XCTestCase {
     }
 
     func testControllerFileredAppController() {
-        Logger.setup(queue: testQueue, consoleWriter: consoleWriterMock, logLevel: .filtered(.controller))
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.controller))
         sut = Logger.shared
 
         sut.log(.controller)
