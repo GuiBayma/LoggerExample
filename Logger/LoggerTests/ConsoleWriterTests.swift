@@ -26,17 +26,9 @@ class ConsoleWriterTests: XCTestCase {
         Logger.resetInstance()
     }
 
+    // MARK: - AppDelegate
+
     func testAppDelegateVerbose() {
-        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
-        sut = Logger.shared
-
-        sut.log(.appDelegate)
-        testQueue.sync {}
-
-        XCTAssertNotNil(consoleWriterMock.output)
-    }
-
-    func testAppDelegateMessageVerbose() {
         Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
@@ -56,6 +48,16 @@ class ConsoleWriterTests: XCTestCase {
         XCTAssertNotNil(consoleWriterMock.output)
     }
 
+    func testAppDelegateFileredSceneDelegate() {
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.sceneDelegate))
+        sut = Logger.shared
+
+        sut.log(.appDelegate)
+        testQueue.sync {}
+
+        XCTAssertNil(consoleWriterMock.output)
+    }
+
     func testAppDelegateFileredController() {
         Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.controller))
         sut = Logger.shared
@@ -66,17 +68,51 @@ class ConsoleWriterTests: XCTestCase {
         XCTAssertNil(consoleWriterMock.output)
     }
 
-    func testControllerVerbose() {
+    // MARK: - SceneDelegate
+
+    func testSceneDelegateVerbose() {
         Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
-        sut.log(.controller)
+        sut.log(.sceneDelegate, "Test Message")
         testQueue.sync {}
 
         XCTAssertNotNil(consoleWriterMock.output)
     }
 
-    func testControllerMessageVerbose() {
+    func testSceneDelegateFileredAppDelegate() {
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.appDelegate))
+        sut = Logger.shared
+
+        sut.log(.sceneDelegate)
+        testQueue.sync {}
+
+        XCTAssertNil(consoleWriterMock.output)
+    }
+
+    func testSceneDelegateFileredSceneDelegate() {
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.sceneDelegate))
+        sut = Logger.shared
+
+        sut.log(.sceneDelegate)
+        testQueue.sync {}
+
+        XCTAssertNotNil(consoleWriterMock.output)
+    }
+
+    func testSceneDelegateFileredController() {
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.controller))
+        sut = Logger.shared
+
+        sut.log(.sceneDelegate)
+        testQueue.sync {}
+
+        XCTAssertNil(consoleWriterMock.output)
+    }
+
+    // MARK: - Controller
+
+    func testControllerVerbose() {
         Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .verbose)
         sut = Logger.shared
 
@@ -88,6 +124,16 @@ class ConsoleWriterTests: XCTestCase {
 
     func testControllerFileredAppDelegate() {
         Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.appDelegate))
+        sut = Logger.shared
+
+        sut.log(.controller)
+        testQueue.sync {}
+
+        XCTAssertNil(consoleWriterMock.output)
+    }
+
+    func testControllerFileredSceneDelegate() {
+        Logger.setup(queue: testQueue, modules: [consoleWriterMock], logLevel: .filtered(.sceneDelegate))
         sut = Logger.shared
 
         sut.log(.controller)

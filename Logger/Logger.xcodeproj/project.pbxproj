@@ -19,6 +19,9 @@
 		1799493623F832660003F784 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493523F832660003F784 /* main.swift */; };
 		1799493923F843A40003F784 /* ConsoleWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493823F843A40003F784 /* ConsoleWriter.swift */; };
 		1799493B23F98D2D0003F784 /* WriterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799493A23F98D2D0003F784 /* WriterProtocol.swift */; };
+		1799495D23F9BFA50003F784 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799495C23F9BFA50003F784 /* SceneDelegate.swift */; };
+		1799495F23F9C40B0003F784 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799495E23F9C40B0003F784 /* TestAppDelegate.swift */; };
+		1799496023F9C4850003F784 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1799495E23F9C40B0003F784 /* TestAppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,8 @@
 		1799493523F832660003F784 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1799493823F843A40003F784 /* ConsoleWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleWriter.swift; sourceTree = "<group>"; };
 		1799493A23F98D2D0003F784 /* WriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterProtocol.swift; sourceTree = "<group>"; };
+		1799495C23F9BFA50003F784 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1799495E23F9C40B0003F784 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +96,7 @@
 			children = (
 				1799491C23F4D0E50003F784 /* Debug */,
 				1799490823F4D0160003F784 /* AppDelegate.swift */,
+				1799495C23F9BFA50003F784 /* SceneDelegate.swift */,
 				1799490C23F4D0160003F784 /* ViewController.swift */,
 				1799491123F4D01A0003F784 /* Assets.xcassets */,
 				1799491323F4D01A0003F784 /* LaunchScreen.storyboard */,
@@ -115,6 +121,7 @@
 		1799492C23F82B930003F784 /* LoggerTests */ = {
 			isa = PBXGroup;
 			children = (
+				1799495E23F9C40B0003F784 /* TestAppDelegate.swift */,
 				1799492D23F82B930003F784 /* ConsoleWriterTests.swift */,
 				1799492F23F82B930003F784 /* Info.plist */,
 			);
@@ -235,7 +242,9 @@
 				1799492623F4E6020003F784 /* LogLevel.swift in Sources */,
 				1799493B23F98D2D0003F784 /* WriterProtocol.swift in Sources */,
 				1799490D23F4D0160003F784 /* ViewController.swift in Sources */,
+				1799495D23F9BFA50003F784 /* SceneDelegate.swift in Sources */,
 				1799491E23F4D1F20003F784 /* Logger.swift in Sources */,
+				1799496023F9C4850003F784 /* TestAppDelegate.swift in Sources */,
 				1799490923F4D0160003F784 /* AppDelegate.swift in Sources */,
 				1799493923F843A40003F784 /* ConsoleWriter.swift in Sources */,
 				1799492223F4DF3A0003F784 /* Environment.swift in Sources */,
@@ -246,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1799495F23F9C40B0003F784 /* TestAppDelegate.swift in Sources */,
 				1799492E23F82B930003F784 /* ConsoleWriterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
